@@ -1,0 +1,71 @@
+﻿@page "/categories"
+@using UseCases.UseCaseInterfaces
+
+@inject NavigationManager NavigationManager
+@inject IViewCategoriesUseCase ViewCategoryUseCase
+@inject IDeleteCategoryUseCase DeleteCategoryUseCase
+
+<h3>Administrar Categorías</h3>
+<br />
+@if (categories != null)
+{
+
+    <table class="table table-bordered align-middle">
+        <thead class="thead-dark align-middle align-center" style="text-align:center">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Editar / Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in categories)
+            {
+                <tr>
+                    <td style="text-align:center">@category.Name</td>
+                    <td style="text-align:center">@category.Description</td>
+                    <td style="text-align:center">
+                        <button type="button" @onclick="@(() => EditCategory(category))" class="btn btn-outline-success">Editar</button>
+                        <button type="button" @onclick="@(() => DeleteCategory(category.CategoryId))" class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<button type="button" @onclick="OnClickAddCategory" class="btn btn-outline-primary">Agregar Categoría</button>
+
+
+
+@code {
+
+    private List<Category> categories;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LoadCategories();
+    }
+
+    private void OnClickAddCategory()
+    {
+        NavigationManager.NavigateTo("/addcategory");
+    }
+
+    private void EditCategory(Category category)
+    {
+        NavigationManager.NavigateTo($"/editcategory/{category.CategoryId}");
+    }
+
+    private void DeleteCategory(int categoryId)
+    {
+        DeleteCategoryUseCase.Delete(categoryId);
+        LoadCategories();
+    }
+
+    private void LoadCategories()
+    {
+        categories = ViewCategoryUseCase.Execute()?.ToList();
+    }
+}
