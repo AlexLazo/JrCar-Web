@@ -1,5 +1,5 @@
-﻿@page "/addcategory" 
-@using UseCases.UseCaseInterfaces
+﻿@page "/addcategory"
+@attribute [Authorize(Policy ="AdminOnly")]
 
 @inject NavigationManager NavigationManager
 @inject IAddCategoryUseCase AddCategoryUseCase

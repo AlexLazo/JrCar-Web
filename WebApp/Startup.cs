@@ -16,6 +16,10 @@ using UseCases.UseCaseInterfaces;
 using UseCases.CategoriesUseCases;
 using UseCases.DataSourcePluginInterfaces;
 using UseCases.ProductsUseCases;
+using UseCases.Transactions;
+using Microsoft.EntityFrameworkCore;
+using Plugins.DataStore.SQL;
+using UseCases;
 
 namespace WebApp
 {
@@ -36,9 +40,26 @@ namespace WebApp
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
+            services.AddDbContext<MarketContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", p => p.RequireClaim("Position", "Admin"));
+                options.AddPolicy("CashierOnly", p => p.RequireClaim("Position", "Cashier"));
+            });
+
             ///Inyección de Datos Almacenados en BD Interna
-            services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
-            services.AddScoped<IProductRepository, ProductInMemoryRepository>();
+            //services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+            //services.AddScoped<IProductRepository, ProductInMemoryRepository>();
+            //services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+
+            //Inyección de Datos para Entity Framwork
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             //Inyección para UseCases y Repositories
             services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
@@ -53,6 +74,9 @@ namespace WebApp
             services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
             services.AddTransient<IViewProductsByCategoryId, ViewProductsByCategoryId>();
             services.AddTransient<ISellProductUseCase, SellProductUseCase>();
+            services.AddTransient<IRecordTransactionUseCase, RecordTransactionUseCase>();
+            services.AddTransient<IGetTodayTransactionsUseCase, GetTodayTransactionsUseCase>();
+            services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,8 +98,12 @@ namespace WebApp
 
             app.UseRouting();
 
+            app.UseAuthorization();
+            app.UseAuthentication();    
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });

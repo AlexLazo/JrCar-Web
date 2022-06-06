@@ -1,6 +1,5 @@
 ﻿@page "/addproduct"
 @attribute [Authorize(Policy ="AdminOnly")]
-@using UseCases.UseCaseInterfaces
 
 @inject NavigationManager NavigationManager
 @inject IAddProductUseCase AddProductUseCase
@@ -45,8 +44,8 @@
         <InputNumber id="year" @bind-Value="product.Year" class="form-control"></InputNumber>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>
-    <button type="button" class="btn btn-primary btn-outline-danger" @onclick="OnCancel">Cancelar</button>
+    <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i> Guardar</button>
+    <button type="button" class="btn btn-outline-danger" @onclick="OnCancel"><i class="fa fa-xmark"></i> Cancelar</button>
 </EditForm>
 
 }

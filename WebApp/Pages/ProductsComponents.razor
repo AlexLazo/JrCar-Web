@@ -1,5 +1,5 @@
 ﻿@page "/products"
-@using UseCases.UseCaseInterfaces
+@attribute [Authorize(Policy ="AdminOnly")]
 
 @inject NavigationManager NavigationManager
 @inject IViewProductsUseCase ViewProductsUseCase
@@ -10,8 +10,8 @@
 <br />
 @if (products != null)
 {
-    <table class="table table-bordered align-middle">
-        <thead class="thead-dark align-middle align-center" style="text-align:center">
+    <table class="table table-bordered">
+        <thead class="thead-dark" style="text-align:center">
             <tr style="text-align:center">
                 <th>Categoría del Vehículo</th>
                 <th>Nombre del Vehículo</th>
@@ -31,9 +31,9 @@
                     <td>@product.Quantity</td>
                     <td>@product.Year</td>
                     <td>
-                        <button type="button" style="text-align:center" class="btn btn-outline-success" @onclick="@(()=>OnEditProduct(product))">Editar</button>
+                        <button type="button" @onclick="@(() => OnEditProduct(product))" class="btn btn-outline-success">Editar</button>
                         &nbsp;
-                        <button type="button" style="text-align:center" class="btn btn-outline-danger" @onclick="@(()=>OnDeleteProduct(product.ProductId))">Eliminar</button>
+                        <button type="button" class="btn btn-outline-danger" @onclick="@(() => OnDeleteProduct(product.ProductId))">Eliminar</button>
                     </td>
                 </tr>
             }
@@ -41,7 +41,7 @@
     </table>
 }
 <br />
-<button type="button" @onclick="OnClickAddProduct" class="btn btn-outline-primary">Agregar Vehículo</button>
+<button type="button" @onclick="OnClickAddProduct" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Agregar Vehículo</button>
 
 
 @code {
@@ -68,5 +68,6 @@
     private void OnDeleteProduct(int productId)
     {
         DeleteProductUseCase.Execute(productId);
+        products = ViewProductsUseCase.Execute();
     }
 }

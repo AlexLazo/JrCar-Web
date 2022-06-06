@@ -1,6 +1,5 @@
 ﻿@page "/editcategory/{categoryId}"
 @attribute [Authorize(Policy = "AdminOnly")]
-@using UseCases.UseCaseInterfaces
 
 @inject NavigationManager NavigationManager
 @inject IAddCategoryUseCase AddCategoryUseCase
@@ -25,8 +24,8 @@
             <InputText id="description" @bind-Value="category.Description" class="form-control"></InputText>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>
-        <button type="button" class="btn btn-primary btn-outline-danger" @onclick="OnCancel">Cancelar</button>
+        <button type="submit" class="btn btn-primary btn-outline-success"><i class="fa fa-check"> Guardar</i></button>
+        <button type="button" class="btn btn-primary btn-outline-danger" @onclick="OnCancel"><i class="fa fa-xmark"> Cancelar</i></button>
     </EditForm>
 
 }
