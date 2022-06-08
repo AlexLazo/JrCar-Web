@@ -7,15 +7,15 @@
 <div id="printarea">
     <div class="row">
         <div class="col-2">
-            <label for="cashier">Cashier Name</label>
+            <label for="cashier">Nombre Cajero</label>
             <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
         </div>
         <div class="col-3">
-            <label for="startdate">Start Date</label>
+            <label for="startdate">Fecha Inicial</label>
             <input type="date" id="startdate" class="form-control" @bind-value="startDate" />
         </div>
         <div class="col-3">
-            <label for="enddate">End Date</label>
+            <label for="enddate">Fecha Final</label>
             <input type="date" id="enddate" class="form-control" @bind-value="endDate" />
         </div>
         <div class="col-2">
@@ -30,23 +30,23 @@
     <br />
     @if (transactions != null)
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Date Time</th>
-                    <th>Cashier Name</th>
-                    <th>Product Name</th>
-                    <th>Qty Before</th>
-                    <th>Qty Sold</th>
-                    <th>Qty After</th>
-                    <th>Price</th>
-                    <th>Sold Amt</th>
+        <table class="table table-bordered">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+                    <th>Fecha</th>
+                    <th>Nombre Cajero</th>
+                    <th>Nombre Vehículo</th>
+                    <th>Cantidad Antes</th>
+                    <th>Cantidad Vendida</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Total Ventas</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var tran in transactions)
                 {
-                    <tr>
+                    <tr style="text-align:center">
                         <td>@tran.TimeStamp.ToString("yyyy-MM-dd hh:mm")</td>
                         <td>@tran.CashierName</td>
                         <td>@tran.ProductName</td>
@@ -62,7 +62,7 @@
                 <tr>
                     <td colspan="6">&nbsp;</td>
                     <td style="text-align:right">
-                        <b>Grand Total:</b>
+                        <b>Total</b>
                     </td>
                     <td style="text-align:right">
                         <b>

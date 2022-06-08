@@ -25,7 +25,7 @@ namespace Plugins.DataStore.SQL
                 .WithOne(p => p.Category)
                 .HasForeignKey(p => p.CategoryId);
 
-            // seeding some data
+            // Agregando algunos datos
             modelBuilder.Entity<Category>().HasData(
                     new Category { CategoryId = 1, Name = "Sedán", Description = "Vehículos Tipo Sedán 4 Puertas" },
                     new Category { CategoryId = 2, Name = "Pick-Up", Description = "Vehículos Tipo Pick-Up 4X4 y 4X2" },

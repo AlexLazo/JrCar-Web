@@ -22,7 +22,7 @@ namespace CoreBusiness
 
         public int Year { get; set; }
 
-        // navigation property for ef core
+        // Propiedad de Navegación para EFCore
         public Category Category { get; set; }
     }
 }
