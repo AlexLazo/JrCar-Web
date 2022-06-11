@@ -3,13 +3,13 @@
 
 <AuthorizeView>
     <Authorized>
-        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
-        <form class="py-2 d-none d-md-inline-block" action="/Identity/Account/Logout?returnUrl=%2F" method="post">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
+        <a class="py-2 px-2 disabled d-none d-md-inline-block" href="#">Hola, @context.User.Identity.Name!</a>
+        <form class="d-none d-md-inline-block" action="/Identity/Account/Logout?returnUrl=%2F" method="post">
+            <button type="submit" class="nav-link btn btn-danger">Logout</button>
         </form>
     </Authorized>
     <NotAuthorized>
-        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Register">Register</a>
-        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Login">Log in</a>
+        <a class="py-2 btn btn-secondary px-3 d-md-inline-block" href="Identity/Account/Register">Registrar</a>
+        <a class="py-2 btn btn-primary px-3 d-md-inline-block" href="Identity/Account/Login">Iniciar Sesión</a>
     </NotAuthorized>
 </AuthorizeView>

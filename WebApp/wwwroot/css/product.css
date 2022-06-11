@@ -6,6 +6,13 @@
  * Custom translucent site header
  */
 
+.index {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .site-header {
     background-color: rgba(0, 0, 0, .85);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -13,18 +20,21 @@
 }
 
     .site-header a {
-        color: #8e8e8e;
+        color: azure;
         transition: color .15s ease-in-out;
     }
 
         .site-header a:hover {
-            color: #fff;
+            color:white;
             text-decoration: none;
         }
 
 /*
  * Dummy devices (replace them with your own or something else entirely!)
  */
+
+
+
 
 .product-device {
     position: absolute;
