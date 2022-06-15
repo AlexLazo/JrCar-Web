@@ -6,6 +6,7 @@
 @inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
 @inject IEditCategoryUseCase EditCategoryUseCase
 
+<div class="container col-md">
 <h2>Editar Categoría</h2>
 <br />
 @if (category != null)
@@ -24,12 +25,12 @@
             <InputText id="description" @bind-Value="category.Description" class="form-control"></InputText>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-outline-success"><i class="fa fa-check"> Guardar</i></button>
-        <button type="button" class="btn btn-primary btn-outline-danger" @onclick="OnCancel"><i class="fa fa-xmark"> Cancelar</i></button>
+        <button type="submit" class="btn btn-outline-success">Guardar</button>
+    <button type="button" class="btn btn-outline-danger" @onclick="OnCancel">Cancelar</button>
     </EditForm>
 
 }
-
+</div>
 
 @code {
     [Parameter]

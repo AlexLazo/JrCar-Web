@@ -2,6 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: aliceblue;
 }
 
 .con {
@@ -54,3 +55,19 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.site-header {
+    background-color: rgba(0, 0, 0, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+    .site-header a {
+        color: azure;
+        transition: color .15s ease-in-out;
+    }
+
+        .site-header a:hover {
+            color: white;
+            text-decoration: none;
+        }
