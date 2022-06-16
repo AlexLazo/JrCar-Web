@@ -1,12 +1,9 @@
-﻿@using UseCases.UseCaseInterfaces
-@using UseCases.Transactions
-
-@inject IGetTodayTransactionsUseCase GetTodayTransactionsUseCase
+﻿@inject IGetTodayTransactionsUseCase GetTodayTransactionsUseCase
 
 @if (transactions != null)
 {
-    <table class="table">
-        <thead>
+    <table class="table table-bordered align-middle">
+        <thead class="thead-dark align-middle align-center" style="text-align:center">
             <tr>
                 <th>Nombre Cajero</th>
                 <th>Nombre Vehículo</th>
